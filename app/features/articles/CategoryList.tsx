@@ -25,7 +25,7 @@ async function CategoryList({ selectedCategory }: CategoryListProps) {
             selectedCategory === category
               ? "bg-blue-700 text-white"
               : "bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-700 hover:to-indigo-700 text-white"
-          } font-bold py-2 px-6 rounded-full transition duration-100 ease-in-out hover:scale-105 capitalize m-2`}
+          } py-2 px-6 rounded-full transition duration-100 ease-in-out hover:scale-105 capitalize m-2`}
         >
           {category}
         </Link>

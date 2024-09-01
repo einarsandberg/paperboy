@@ -21,18 +21,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
-          <div className="flex justify-end pt-10 max-w-4xl mx-auto">
+          <div className="flex justify-end pt-10 max-w-4xl w-full mx-auto">
             <div className="mr-4 md:mr-0">
               <Login />
             </div>
           </div>
-          <div className="min-h-screen p-4 pt-24 w-full flex flex-col items-center justify-between">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
-              <div className="md:col-span-1">
-                <Sidebar />
-              </div>
-              <div className="md:col-span-2">{children}</div>
+          <div className="min-h-screen p-4 pt-24 w-full flex items-start justify-center">
+            <div className="fixed left-0 top-24 w-64 z-10">
+              <Sidebar />
             </div>
+            <div className="flex-1 max-w-4xl w-full">{children}</div>
           </div>
         </SessionProvider>
       </body>
