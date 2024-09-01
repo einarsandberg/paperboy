@@ -21,11 +21,11 @@ interface ArticleListProps {
 async function ArticleList({ articles }: ArticleListProps) {
   const savedArticles = await getSavedArticles();
   return (
-    <div className="grid grid-cols-1 gap-6">
+    <div className="grid grid-cols-1 gap-6 px-4 sm:px-16 w-full">
       {articles.map((article) => (
         <article
           key={article.url}
-          className="group block p-5 transition-shadow hover:shadow-lg border border-gray-200 rounded-lg bg-white"
+          className="group block p-5 transition-shadow hover:shadow-lg border border-gray-200 rounded-lg bg-white w-full"
         >
           <div className="flex justify-end mb-8">
             <SaveArticleButton article={article} savedArticles={savedArticles} />

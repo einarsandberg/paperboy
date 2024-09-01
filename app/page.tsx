@@ -18,10 +18,12 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const session = await auth();
 
   return (
-    <main>
-      <Login />
+    <main className="w-full">
+      {/* <Login /> */}
       <CategoryList selectedCategory={category} />
-      <ArticleList articles={articles} />
+      <div className="max-w-4xl mx-auto">
+        <ArticleList articles={articles} />
+      </div>
     </main>
   );
 }

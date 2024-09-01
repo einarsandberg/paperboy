@@ -16,7 +16,7 @@ interface CategoryListProps {
 }
 async function CategoryList({ selectedCategory }: CategoryListProps) {
   return (
-    <div className="flex flex-wrap justify-center gap-4">
+    <div className="flex justify-center gap-4 flex-nowrap overflow-x-auto mb-8">
       {categories.map((category) => (
         <Link
           key={category}
@@ -25,7 +25,7 @@ async function CategoryList({ selectedCategory }: CategoryListProps) {
             selectedCategory === category
               ? "bg-blue-700 text-white"
               : "bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-700 hover:to-indigo-700 text-white"
-          } font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 capitalize m-2`}
+          } font-bold py-2 px-6 rounded-full transition duration-100 ease-in-out hover:scale-105 capitalize m-2`}
         >
           {category}
         </Link>
