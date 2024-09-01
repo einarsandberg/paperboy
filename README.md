@@ -2,6 +2,11 @@
 
 Find news by category.
 
+## How it works:
+
+1. If not logged in, gives you a list of articles for a number of different categories.
+2. If you're logged in, you can save articles to read later.
+
 ## To run:
 
 1. Add a file called `env.local` with the following content:
