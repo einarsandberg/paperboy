@@ -13,5 +13,9 @@ export async function getArticles(category: Category) {
     throw new Error("Failed to fetch articles");
   }
   const data = await res.json();
-  return data.articles as Article[];
+  // Add category to each article
+  const articles: Article[] = data.articles.map((article: Article) => {
+    return { ...article, category };
+  });
+  return articles;
 }

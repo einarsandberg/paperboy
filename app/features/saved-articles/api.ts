@@ -2,11 +2,13 @@
 
 import { sql } from '@vercel/postgres';
 import { Article } from "../articles/ArticleList";
+import { revalidatePath } from 'next/cache';
 
 
 export async function saveArticle(article: Article) {
   try {
-    await sql`INSERT INTO saved_articles (url, title, author, content, published_at, source_name, description, url_to_image) VALUES (${article.url}, ${article.title}, ${article.author}, ${article.content}, ${article.publishedAt}, ${article.source.name}, ${article.description}, ${article.urlToImage})`;
+    await sql`INSERT INTO saved_articles (url, title, author, content, published_at, source_name, description, url_to_image, category) VALUES (${article.url}, ${article.title}, ${article.author}, ${article.content}, ${article.publishedAt}, ${article.source.name}, ${article.description}, ${article.urlToImage}, ${article.category})`;
+    revalidatePath("/saved-articles");
   }
   catch (error) {
     console.error(error);
@@ -15,6 +17,7 @@ export async function saveArticle(article: Article) {
 
 export async function removeArticle(articleUrl: string) {
   await sql`DELETE FROM saved_articles WHERE url = ${articleUrl}`;
+  revalidatePath("/saved-articles");
 }
 
 export async function getSavedArticles() {
@@ -30,6 +33,7 @@ export async function getSavedArticles() {
       },
       description: row.description,
       urlToImage: row.url_to_image,
+      category: row.category,
     } as Article;
   })
 }

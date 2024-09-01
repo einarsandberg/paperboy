@@ -13,6 +13,7 @@ export interface Article {
   description?: string;
   content?: string;
   urlToImage?: string;
+  category: string;
 }
 
 interface ArticleListProps {
@@ -20,8 +21,9 @@ interface ArticleListProps {
 }
 async function ArticleList({ articles }: ArticleListProps) {
   const savedArticles = await getSavedArticles();
+
   return (
-    <div className="grid grid-cols-1 gap-6 px-4 sm:px-16 w-full">
+    <div className="grid grid-cols-1 gap-6 px-4 sm:px-16 max-w-4xl mx-auto w-full">
       {articles.map((article) => (
         <article
           key={article.url}

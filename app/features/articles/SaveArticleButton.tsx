@@ -2,6 +2,7 @@
 import { RxStar, RxStarFilled } from "react-icons/rx";
 import { Article } from "./ArticleList";
 import { removeArticle, saveArticle } from "../saved-articles/api";
+import { revalidatePath } from "next/cache";
 
 interface SaveArticleButtonProps {
   article: Article;

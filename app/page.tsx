@@ -21,9 +21,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
     <main className="w-full">
       {/* <Login /> */}
       <CategoryList selectedCategory={category} />
-      <div className="max-w-4xl mx-auto">
-        <ArticleList articles={articles} />
-      </div>
+
+      <ArticleList articles={articles} />
     </main>
   );
 }
