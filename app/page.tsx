@@ -2,16 +2,10 @@ import { auth } from "@/auth";
 import { getArticles } from "./features/articles/api";
 import ArticleList from "@/app/features/articles/ArticleList";
 import CategoryList, { Category, categories } from "./features/articles/CategoryList";
-import Login from "./features/login/Login";
+import { getSelectedCategory } from "./common/utils/pageUtils";
+import { PageProps } from "./common/types";
 
-function getSelectedCategory(category: string): Category {
-  if (categories.includes(category as Category)) {
-    return category as Category;
-  }
-  return categories[0];
-}
-
-export default async function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
+export default async function Home({ searchParams }: PageProps) {
   const category = getSelectedCategory(searchParams.category);
   const articles = await getArticles(category);
 
@@ -19,10 +13,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
 
   return (
     <main className="w-full">
-      {/* <Login /> */}
       <CategoryList selectedCategory={category} />
-
-      <ArticleList articles={articles} />
+      <ArticleList articles={articles} selectedCategory={category} />
     </main>
   );
 }

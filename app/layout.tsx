@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./features/articles/Sidebar";
+import Login from "./features/login/Login";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +20,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex min-h-screen flex-col items-center justify-between p-4 pt-24 w-full">
-          <div className="flex flex-row w-full">
-            <Sidebar />
-            <div className="w-full">{children}</div>
+        <SessionProvider>
+          <div className="flex justify-end pt-10 max-w-4xl mx-auto">
+            <div className="mr-4 md:mr-0">
+              <Login />
+            </div>
           </div>
-        </div>
+          <div className="min-h-screen p-4 pt-24 w-full flex flex-col items-center justify-between">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+              <div className="md:col-span-1">
+                <Sidebar />
+              </div>
+              <div className="md:col-span-2">{children}</div>
+            </div>
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );

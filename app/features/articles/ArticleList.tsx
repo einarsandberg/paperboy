@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { getSavedArticles } from "../saved-articles/api";
 import SaveArticleButton from "./SaveArticleButton";
 
@@ -18,19 +19,23 @@ export interface Article {
 
 interface ArticleListProps {
   articles: Article[];
+  selectedCategory: string;
 }
-async function ArticleList({ articles }: ArticleListProps) {
-  const savedArticles = await getSavedArticles();
+
+async function ArticleList({ articles, selectedCategory }: ArticleListProps) {
+  const session = await auth();
+  const savedArticles = session?.user?.email ? await getSavedArticles(selectedCategory, session.user.email) : [];
 
   return (
-    <div className="grid grid-cols-1 gap-6 px-4 sm:px-16 max-w-4xl mx-auto w-full">
+    <div className="grid grid-cols-1 gap-6 px-4 sm:px-0 w-full">
+      {articles.length === 0 ? <p className="text-center text-gray-500">No articles found</p> : null}
       {articles.map((article) => (
         <article
           key={article.url}
           className="group block p-5 transition-shadow hover:shadow-lg border border-gray-200 rounded-lg bg-white w-full"
         >
           <div className="flex justify-end mb-8">
-            <SaveArticleButton article={article} savedArticles={savedArticles} />
+            {session?.user?.email ? <SaveArticleButton article={article} savedArticles={savedArticles} /> : null}
           </div>
           <a href={article.url} target="_blank" rel="noopener noreferrer">
             <div className="h-48 relative rounded-lg overflow-hidden">

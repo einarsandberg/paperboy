@@ -16,7 +16,7 @@ interface CategoryListProps {
 }
 async function CategoryList({ selectedCategory }: CategoryListProps) {
   return (
-    <div className="flex justify-center gap-4 flex-nowrap overflow-x-auto mb-8">
+    <div className="flex justify-center gap-4 flex-nowrap md:flex-wrap overflow-x-auto mb-8">
       {categories.map((category) => (
         <Link
           key={category}

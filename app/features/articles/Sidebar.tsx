@@ -2,14 +2,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useSession } from "next-auth/react";
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { data: session } = useSession();
+  console.log(session);
+  const isAuthenticated = !!session;
 
   const toggleMenu = () => {
     setIsOpen((open) => !open);
   };
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div>
